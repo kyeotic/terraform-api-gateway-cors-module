@@ -4,11 +4,12 @@ This is a slim Terraform module which creates an OPTIONS method and applies a CO
 
 Example: 
 ```
-module "MyResourceCors" {
-  source = "github.com/carrot/terraform-api-gateway-cors-module"
-  resource_name = "MyResource"
-  resource_id = "${aws_api_gateway_resource.MyResource.id}"
-  rest_api_id = "${aws_api_gateway_rest_api.MyAPI.id}"
+#options
+module "api_gateway_cors" {
+  source = "git::ssh://git@github.nike.com/ngp/terraform-api-gateway-cors-module.git"
+  resource_name = "greedy_path_resource"
+  resource_id = "${aws_api_gateway_resource.greedy_path_resource.id}"
+  rest_api_id = "${aws_api_gateway_rest_api.api_gateway_rest_api.id}"
 }
 ```
 
