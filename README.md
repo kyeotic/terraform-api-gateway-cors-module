@@ -6,10 +6,9 @@ Example:
 ```
 #options
 module "api_gateway_cors" {
-  source = "git::ssh://git@github.com:ninnemannk/terraform-api-gateway-cors-module.git"
-  resource_name = "greedy_path_resource"
-  resource_id = "${aws_api_gateway_resource.greedy_path_resource.id}"
-  rest_api_id = "${aws_api_gateway_rest_api.api_gateway_rest_api.id}"
+  source      = "github.com/kyeotic/terraform-api-gateway-cors-module.git?ref=1.1"
+  resource_id = aws_api_gateway_resource.gql.id
+  rest_api_id = aws_api_gateway_rest_api.api.id
 }
 ```
 
