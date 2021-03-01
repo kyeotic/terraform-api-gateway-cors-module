@@ -1,3 +1,13 @@
+
+terraform {
+  required_version = ">= 0.12"
+}
+
+locals {
+  defaultHeaders= ["Content-Type","X-Amz-Date","Authorization","X-Api-Key","X-Amz-Security-Token","cache-control"]
+  headers = concat(defaultHeaders, var.additional_headers)
+}
+
 resource "aws_api_gateway_method" "ResourceOptions" {
   rest_api_id   = var.rest_api_id
   resource_id   = var.resource_id
@@ -43,7 +53,7 @@ resource "aws_api_gateway_integration_response" "ResourceOptionsIntegrationRespo
   status_code = aws_api_gateway_method_response.ResourceOptions200.status_code
 
   response_parameters = {
-    "method.response.header.Access-Control-Allow-Headers" = "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,cache-control'"
+    "method.response.header.Access-Control-Allow-Headers" = "'${join(",", local.headers)}'"
     "method.response.header.Access-Control-Allow-Methods" = "'POST,OPTIONS,GET,PUT,PATCH,DELETE'"
     "method.response.header.Access-Control-Allow-Origin"  = "'*'"
   }
