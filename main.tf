@@ -5,7 +5,7 @@ terraform {
 
 locals {
   defaultHeaders= ["Content-Type","X-Amz-Date","Authorization","X-Api-Key","X-Amz-Security-Token","cache-control"]
-  headers = concat(defaultHeaders, var.additional_headers)
+  headers = concat(local.defaultHeaders, var.additional_headers)
 }
 
 resource "aws_api_gateway_method" "ResourceOptions" {
